@@ -1,0 +1,39 @@
+# Frank Sapien Simulator — Python dependencies (Python 3.10)
+#
+# NOTE:
+#   * torch / torchvision / torchaudio are installed separately in the
+#     Dockerfile against the CUDA 12.1 (cu121) wheel index. Do NOT add them
+#     here or you risk pulling CPU-only wheels over the CUDA build.
+#   * numpy is pinned to 1.23.5 in the Dockerfile (installed last). Leaving it
+#     unpinned here lets pip resolve, then the Dockerfile enforces that version.
+
+# --- Core simulation & environment API -------------------------------------
+# SAPIEN 3.x is required for GPU-parallel physics + Vulkan rendering.
+# (The 2.x line is CPU-only and does not support the vectorized GPU envs.)
+sapien>=3.0.0b1
+gymnasium>=0.29
+
+# --- Math / geometry / assets ----------------------------------------------
+scipy
+transforms3d
+trimesh
+pyyaml
+
+# --- Image / video I/O (RGB / depth / segmentation observations) -----------
+opencv-python
+imageio
+imageio-ffmpeg
+Pillow
+
+# --- Config & experiment management ----------------------------------------
+hydra-core
+omegaconf
+
+# --- Logging / experiment tracking -----------------------------------------
+wandb
+tensorboard
+tqdm
+rich
+
+# --- Plotting / debugging --------------------------------------------------
+matplotlib

@@ -1,0 +1,23 @@
+{
+  // VS Code Dev Containers config. Optional — only needed if you use the
+  // "Dev Containers: Rebuild and Reopen in Container" workflow. If you drive
+  // the containers purely from the docker compose CLI you can ignore this file.
+  "name": "frank-sapien",
+  "dockerComposeFile": "docker-compose.yml",
+  // Which service to attach VS Code to. Switch to another service (e.g.
+  // frank_sapien_gpu1) to develop on a different GPU.
+  "service": "frank_sapien_gpu0",
+  "workspaceFolder": "/Frank-Sapien",
+  // The container user is created from USER_NAME in .env (defaults to your host
+  // username via setupEnv.sh); ${localEnv:USER} keeps VS Code in sync with it.
+  "remoteUser": "${localEnv:USER}",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  }
+}

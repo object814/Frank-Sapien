@@ -1,0 +1,3 @@
+[submodule "frank_sapien/assets/frank"]
+	path = frank_sapien/assets/frank
+	url = git@github.com:applied-ai-lab/frank_assets.git
