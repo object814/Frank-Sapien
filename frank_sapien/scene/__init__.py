@@ -1,5 +1,9 @@
-"""scene: reusable, task-agnostic construction of the physical stage.
+"""scene: task-agnostic construction of the physical stage.
 
-Modules here know how to populate a SAPIEN scene with static elements (ground
-plane, table, lighting). They contain no task logic and no robot.
+- :mod:`~frank_sapien.scene.lighting` -- a reusable lighting rig, shared across
+  environments.
+- :mod:`~frank_sapien.scene.table_top` -- the self-contained table-top scene
+  builder (ground, table, lighting, and the Frank robot).
+
+Scripts import the scene builder here; there is no task or reward logic.
 """
