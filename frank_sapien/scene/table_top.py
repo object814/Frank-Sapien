@@ -92,8 +92,8 @@ def add_table_to_scene(scene: sapien.Scene, table_urdf_path: Optional[Path] = No
     if not table_urdf_path:
         table_urdf_path = (ASSETS_PATH / "world" / "table" / "table.urdf").resolve()
 
-    # Fixed pose for the table in the scene (the MuJoCo table yawed 180 deg).
-    table_pose = sapien.Pose(p=[0.2028, -0.38, 0.6996], q=[0.5, -0.5, 0.5, 0.5])
+    # Fixed pose for the table in the scene (matches the MuJoCo reference frame).
+    table_pose = sapien.Pose(p=[-0.2028, 0.38, 0.6996], q=[0.5, 0.5, 0.5, -0.5])
 
     table_material = scene.create_physical_material(
         static_friction=1.0, dynamic_friction=1.0, restitution=0.0
@@ -208,19 +208,17 @@ def build_table_top_scene(
     ground = scene.add_ground(0)
     lighting.add_lighting(scene)
 
-    # 1. Load Frank at the chosen MuJoCo-matching config (init_config). Two base
-    #    adjustments make the whole robot match the MuJoCo reference:
-    #    - Yaw 180 deg about Z: SAPIEN's table sits at negated (x, y) versus the
-    #      MuJoCo scene, so this makes the robot-relative-to-table layout match
-    #      and the home joint angles carry over directly.
-    #    - Lower the root by 0.31 m: MuJoCo bypasses the ridgeback base chain and
-    #      hardcodes the arm mount at z=0.815 (lift ref=0.325), so its lift-top is
-    #      0.31 m lower than SAPIEN's full URDF base chain. This offset (constant
-    #      in the lift value) drops the trunk + arms onto the MuJoCo heights.
+    # 1. Load Frank at the chosen MuJoCo-matching config (init_config). The base
+    #    keeps the MuJoCo reference orientation (identity yaw) so the robot faces
+    #    +x -- the table sits at MuJoCo's (x, y) and the home joint angles carry
+    #    over directly. The root is lowered by 0.31 m because MuJoCo bypasses the
+    #    ridgeback base chain and hardcodes the arm mount at z=0.815 (lift
+    #    ref=0.325), 0.31 m below SAPIEN's full URDF base chain; this constant
+    #    offset drops the trunk + arms onto the MuJoCo heights.
     frank = Frank(
         scene,
         root_position=(0.0, 0.0, -0.31),
-        root_quaternion=(0.0, 0.0, 0.0, 1.0),
+        root_quaternion=(1.0, 0.0, 0.0, 0.0),
         init_config=init_config,
     )
 

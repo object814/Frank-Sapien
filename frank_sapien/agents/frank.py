@@ -81,7 +81,8 @@ class Frank:
             "left_kinova_arm_joint_4": 1.8296,
             "left_kinova_arm_joint_5": -0.2667,
             "left_kinova_arm_joint_6": 1.7525,
-            "left_kinova_arm_joint_7": 0.6911,
+            # 0.6911 (MuJoCo) + pi: spins the left gripper 180 deg about world Z.
+            "left_kinova_arm_joint_7": 3.8327,
             "right_kinova_arm_joint_1": -1.8403,
             "right_kinova_arm_joint_2": 1.1124,
             "right_kinova_arm_joint_3": 0.9143,

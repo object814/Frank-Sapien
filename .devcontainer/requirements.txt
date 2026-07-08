@@ -19,6 +19,10 @@ transforms3d
 trimesh
 pyyaml
 
+# --- Motion planning (collision-aware IK / RRT / TOPP for the controller) ---
+# mplib bundles its own FCL + OMPL + pinocchio + toppra.
+mplib
+
 # --- Image / video I/O (RGB / depth / segmentation observations) -----------
 opencv-python
 imageio
